@@ -62,7 +62,7 @@ def top_list(date = None, retry_count=3, pause=0.001):
         time.sleep(pause)
         try:
             request = Request(rv.LHB_URL%(ct.P_TYPE['http'], ct.DOMAINS['em'], date))
-            text = urlopen(request, timeout=10).read()
+            text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
             text = text.decode('GBK')
             html = lxml.html.parse(StringIO(text))
             res = html.xpath("//table[@id=\"dt_1\"]")
@@ -129,7 +129,7 @@ def _cap_tops(last=5, pageNo=1, retry_count=3, pause=0.001, dataArr=pd.DataFrame
         try:
             request = Request(rv.LHB_SINA_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'], rv.LHB_KINDS[0],
                                                ct.PAGES['fd'], last, pageNo))
-            text = urlopen(request, timeout=10).read()
+            text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
             text = text.decode('GBK')
             html = lxml.html.parse(StringIO(text))
             res = html.xpath("//table[@id=\"dataTable\"]/tr")
@@ -187,7 +187,7 @@ def _broker_tops(last=5, pageNo=1, retry_count=3, pause=0.001, dataArr=pd.DataFr
         try:
             request = Request(rv.LHB_SINA_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'], rv.LHB_KINDS[1],
                                                ct.PAGES['fd'], last, pageNo))
-            text = urlopen(request, timeout=10).read()
+            text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
             text = text.decode('GBK')
             html = lxml.html.parse(StringIO(text))
             res = html.xpath("//table[@id=\"dataTable\"]/tr")
@@ -247,7 +247,7 @@ def _inst_tops(last=5, pageNo=1, retry_count=3, pause=0.001, dataArr=pd.DataFram
         try:
             request = Request(rv.LHB_SINA_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'], rv.LHB_KINDS[2],
                                                ct.PAGES['fd'], last, pageNo))
-            text = urlopen(request, timeout=10).read()
+            text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
             text = text.decode('GBK')
             html = lxml.html.parse(StringIO(text))
             res = html.xpath("//table[@id=\"dataTable\"]/tr")
@@ -305,7 +305,7 @@ def _inst_detail(pageNo=1, retry_count=3, pause=0.001, dataArr=pd.DataFrame()):
         try:
             request = Request(rv.LHB_SINA_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'], rv.LHB_KINDS[3],
                                                ct.PAGES['fd'], '', pageNo))
-            text = urlopen(request, timeout=10).read()
+            text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
             text = text.decode('GBK')
             html = lxml.html.parse(StringIO(text))
             res = html.xpath("//table[@id=\"dataTable\"]/tr")

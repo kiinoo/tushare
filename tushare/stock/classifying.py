@@ -142,7 +142,7 @@ def _get_detail(tag, retry_count=3, pause=0.001):
             request = Request(ct.SINA_DATA_DETAIL_URL%(ct.P_TYPE['http'],
                                                                ct.DOMAINS['vsf'], ct.PAGES['jv'],
                                                                tag))
-            text = urlopen(request, timeout=10).read()
+            text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
             text = text.decode('gbk')
         except _network_error_classes:
             pass
@@ -162,7 +162,7 @@ def _get_detail(tag, retry_count=3, pause=0.001):
 def _get_type_data(url):
     try:
         request = Request(url)
-        data_str = urlopen(request, timeout=10).read()
+        data_str = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         data_str = data_str.decode('GBK')
         data_str = data_str.split('=')[1]
         data_json = json.loads(data_str)

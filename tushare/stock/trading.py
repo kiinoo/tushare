@@ -106,7 +106,7 @@ def _parsing_dayprice_json(pageNum=1):
     ct._write_console()
     request = Request(ct.SINA_DAY_PRICE_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'],
                                  ct.PAGES['jv'], pageNum))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     if text == 'null':
         return None
     reg = re.compile(r'\,(.*?)\:') 
@@ -151,7 +151,7 @@ def get_tick_data(code=None, date=None, retry_count=3, pause=0.001):
         try:
             re = Request(ct.TICK_PRICE_URL % (ct.P_TYPE['http'], ct.DOMAINS['sf'], ct.PAGES['dl'],
                                 date, symbol))
-            lines = urlopen(re, timeout=10).read()
+            lines = urlopen(re, timeout=ct.HTTP_TIMEOUT).read()
             lines = lines.decode('GBK') 
             if len(lines) < 100:
                 return None
@@ -188,7 +188,7 @@ def get_today_ticks(code=None, retry_count=3, pause=0.001):
         request = Request(ct.TODAY_TICKS_PAGE_URL % (ct.P_TYPE['http'], ct.DOMAINS['vsf'],
                                                    ct.PAGES['jv'], date,
                                                    symbol))
-        data_str = urlopen(request, timeout=10).read()
+        data_str = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         data_str = data_str.decode('GBK')
         data_str = data_str[1:-1]
         data_str = eval(data_str, type('Dummy', (dict,), 
@@ -297,7 +297,7 @@ def get_realtime_quotes(symbols=None):
     symbols_list = symbols_list[:-1] if len(symbols_list) > 8 else symbols_list 
     request = Request(ct.LIVE_DATA_URL%(ct.P_TYPE['http'], ct.DOMAINS['sinahq'],
                                                 _random(), symbols_list))
-    text = urlopen(request,timeout=10).read()
+    text = urlopen(request,timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('GBK')
     reg = re.compile(r'\="(.*?)\";')
     data = reg.findall(text)
@@ -428,7 +428,7 @@ def _parase_fq_factor(code, start, end):
     symbol = _code_to_symbol(code)
     request = Request(ct.HIST_FQ_FACTOR_URL%(ct.P_TYPE['http'],
                                              ct.DOMAINS['vsf'], symbol))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text[1:len(text)-1]
     text = text.decode('utf-8') if ct.PY3 else text
     text = text.replace('{_', '{"')
@@ -459,7 +459,7 @@ def _parse_fq_data(url, index, retry_count, pause):
         time.sleep(pause)
         try:
             request = Request(url)
-            text = urlopen(request, timeout=10).read()
+            text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
             text = text.decode('GBK')
             html = lxml.html.parse(StringIO(text))
             res = html.xpath('//table[@id=\"FundHoldSharesTable\"]')
@@ -504,7 +504,7 @@ def get_index():
     """
     request = Request(ct.INDEX_HQ_URL%(ct.P_TYPE['http'],
                                              ct.DOMAINS['sinahq']))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('GBK')
     text = text.replace('var hq_str_sh', '').replace('var hq_str_sz', '')
     text = text.replace('";', '').replace('"', '').replace('=', ',')

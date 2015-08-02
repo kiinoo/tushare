@@ -41,7 +41,7 @@ def get_stock_basics():
                timeToMarket,上市日期
     """
     request = Request(ct.ALL_STOCK_BASICS_FILE)
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('GBK')
     df = pd.read_csv(StringIO(text), dtype={'code':'object'})
     df = df.set_index('code')
@@ -86,7 +86,7 @@ def _get_report_data(year, quarter, pageNo, dataArr):
     try:
         request = Request(ct.REPORT_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'], ct.PAGES['fd'],
                          year, quarter, pageNo, ct.PAGE_NUM[1]))
-        text = urlopen(request, timeout=10).read()
+        text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         text = text.decode('GBK')
         html = lxml.html.parse(StringIO(text))
         res = html.xpath("//table[@class=\"list_table\"]/tr")
@@ -147,7 +147,7 @@ def _get_profit_data(year, quarter, pageNo, dataArr):
         request = Request(ct.PROFIT_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'],
                                               ct.PAGES['fd'], year,
                                               quarter, pageNo, ct.PAGE_NUM[1]))
-        text = urlopen(request, timeout=10).read()
+        text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         text = text.decode('GBK')
         html = lxml.html.parse(StringIO(text))
         res = html.xpath("//table[@class=\"list_table\"]/tr")
@@ -206,7 +206,7 @@ def _get_operation_data(year, quarter, pageNo, dataArr):
         request = Request(ct.OPERATION_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'],
                                                  ct.PAGES['fd'], year,
                                                  quarter, pageNo, ct.PAGE_NUM[1]))
-        text = urlopen(request, timeout=10).read()
+        text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         text = text.decode('GBK')
         html = lxml.html.parse(StringIO(text))
         res = html.xpath("//table[@class=\"list_table\"]/tr")
@@ -265,7 +265,7 @@ def _get_growth_data(year, quarter, pageNo, dataArr):
         request = Request(ct.GROWTH_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'],
                                               ct.PAGES['fd'], year,
                                               quarter, pageNo, ct.PAGE_NUM[1]))
-        text = urlopen(request, timeout=10).read()
+        text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         text = text.decode('GBK')
         html = lxml.html.parse(StringIO(text))
         res = html.xpath("//table[@class=\"list_table\"]/tr")
@@ -324,7 +324,7 @@ def _get_debtpaying_data(year, quarter, pageNo, dataArr):
         request = Request(ct.DEBTPAYING_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'],
                                                   ct.PAGES['fd'], year,
                                                   quarter, pageNo, ct.PAGE_NUM[1]))
-        text = urlopen(request, timeout=10).read()
+        text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         text = text.decode('GBK')
         html = lxml.html.parse(StringIO(text))
         res = html.xpath("//table[@class=\"list_table\"]/tr")
@@ -382,7 +382,7 @@ def _get_cashflow_data(year, quarter, pageNo, dataArr):
         request = Request(ct.CASHFLOW_URL%(ct.P_TYPE['http'], ct.DOMAINS['vsf'],
                                                 ct.PAGES['fd'], year,
                                                 quarter, pageNo, ct.PAGE_NUM[1]))
-        text = urlopen(request, timeout=10).read()
+        text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         text = text.decode('GBK')
         html = lxml.html.parse(StringIO(text))
         res = html.xpath("//table[@class=\"list_table\"]/tr")

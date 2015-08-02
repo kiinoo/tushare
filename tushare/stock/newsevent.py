@@ -46,7 +46,7 @@ def get_latest_news(top=None, show_content=False):
         request = Request(nv.LATEST_URL % (ct.P_TYPE['http'], ct.DOMAINS['sina'],
                                                    ct.PAGES['lnews'], top,
                                                    _random()))
-        data_str = urlopen(request, timeout=10).read()
+        data_str = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
         data_str = data_str.decode('GBK')
         data_str = data_str.split('=')[1][:-1]
         data_str = eval(data_str, type('Dummy', (dict,), 

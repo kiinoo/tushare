@@ -42,7 +42,7 @@ def get_gdp_year():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[0], 0, 70,
                                     rdint))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk') if ct.PY3 else text
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -75,7 +75,7 @@ def get_gdp_quarter():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[0], 1, 250,
                                     rdint))
-    text = urlopen(request,timeout=10).read()
+    text = urlopen(request,timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk') if ct.PY3 else text
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -106,7 +106,7 @@ def get_gdp_for():
     rdint = vs.random()
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[0], 4, 80, rdint))
-    text = urlopen(request,timeout=10).read()
+    text = urlopen(request,timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk') if ct.PY3 else text
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -135,7 +135,7 @@ def get_gdp_pull():
     rdint = vs.random()
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[0], 5, 60, rdint))
-    text = urlopen(request,timeout=10).read()
+    text = urlopen(request,timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk') if ct.PY3 else text
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -164,7 +164,7 @@ def get_gdp_contrib():
     rdint = vs.random()
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'], rdint,
                                     vs.MACRO_TYPE[0], 6, 60, rdint))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk') if ct.PY3 else text
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -189,7 +189,7 @@ def get_cpi():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[1], 0, 600,
                                     rdint))
-    text = urlopen(request,timeout=10).read()
+    text = urlopen(request,timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk') if ct.PY3 else text
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -223,7 +223,7 @@ def get_ppi():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[1], 3, 600,
                                     rdint))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk') if ct.PY3 else text
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -252,7 +252,7 @@ def get_deposit_rate():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[2], 2, 600,
                                     rdint))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk')
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -279,7 +279,7 @@ def get_loan_rate():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[2], 3, 800,
                                     rdint))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk')
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -307,7 +307,7 @@ def get_rrr():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[2], 4, 100,
                                     rdint))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk')
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -348,7 +348,7 @@ def get_money_supply():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[2], 1, 600,
                                     rdint))
-    text = urlopen(request, timeout=10).read()
+    text = urlopen(request, timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk')
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
@@ -381,7 +381,7 @@ def get_money_supply_bal():
     request = Request(vs.MACRO_URL%(vs.P_TYPE['http'], vs.DOMAINS['sina'],
                                     rdint, vs.MACRO_TYPE[2], 0, 200,
                                     rdint))
-    text = urlopen(request,timeout=10).read()
+    text = urlopen(request,timeout=ct.HTTP_TIMEOUT).read()
     text = text.decode('gbk')
     regSym = re.compile(r'\,count:(.*?)\}')
     datastr = regSym.findall(text)
